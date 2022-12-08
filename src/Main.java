@@ -30,7 +30,9 @@ public class Main {
         if (length == 0) {
             if(prefix.equalsIgnoreCase(searchPhrase)){
                 System.out.println("Password Found: " + prefix);
+                System.exit(0);
                 return;
+
             }
             System.out.println(prefix);
             return;
