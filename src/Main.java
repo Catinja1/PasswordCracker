@@ -1,21 +1,25 @@
-import java.io.StringReader;
-import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Scanner;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
+
 
         System.out.print("Enter the password to search for: ");
         String searchPhrase = scanner.nextLine();
 
-        BruteForce(searchPhrase);
+
+        commonPasswords(searchPhrase);
         Dictionary(searchPhrase);
+        BruteForce(searchPhrase);
+
+
+
     }
 
     public static void BruteForce(String searchPhrase) {
@@ -41,7 +45,7 @@ public class Main {
                 return;
 
             }
-            System.out.println(prefix);
+
             return;
         }
 
@@ -53,26 +57,40 @@ public class Main {
                 generateCombinations(chars, prefix + chars.charAt(i), length - 1, searchPhrase);
         }
     }
+    public static void Dictionary(String searchPhrase) throws IOException {
+        String fileName = "DictionaryList.txt";
+        String line = null;
 
-    public static ArrayList<String> readStringsFromFile(String filePath, String searchPhrase) {
-        ArrayList<String> strings = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                strings.add(line);
+
+        FileReader fileReader = new FileReader(fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        while ((line = bufferedReader.readLine()) != null) {
+            if (line.equalsIgnoreCase(searchPhrase)) {
+                System.out.println("Password Found: " + line);
+                System.exit(0);
+                return;
+
             }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return strings;
+        bufferedReader.close();
+    }
+
+    public static void commonPasswords(String searchPhrase) throws IOException {
+        String fileName = "10kPasswords.txt";
+        String line = null;
 
 
-        ArrayList<String> stringz = StringReader.readStringsFromFile("OneDrive - Clear Creek ISD/to/Documents/to/DictionaryList.txt");
+        FileReader fileReader = new FileReader(fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        for (String string : strings) {
-            System.out.println(string);
+        while((line = bufferedReader.readLine()) != null) {
+            if (line.equalsIgnoreCase(searchPhrase)) {
+                System.out.println("Password Found: " + line);
+                System.exit(0);
+                return;
+            }
         }
+        bufferedReader.close();
     }
 }
