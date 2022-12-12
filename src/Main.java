@@ -40,7 +40,7 @@ public class Main {
         // If we have reached the desired length, print the current combination
         if (length == 0) {
             if (prefix.equalsIgnoreCase(searchPhrase)) {
-                System.out.println("Password Found: " + prefix);
+                System.out.println("Password Found Using Brute: " + prefix);
                 System.exit(0);
                 return;
 
@@ -67,7 +67,7 @@ public class Main {
 
         while ((line = bufferedReader.readLine()) != null) {
             if (line.equalsIgnoreCase(searchPhrase)) {
-                System.out.println("Password Found: " + line);
+                System.out.println("Password Found Using Dictionary: " + line);
                 System.exit(0);
                 return;
 
@@ -86,7 +86,7 @@ public class Main {
 
         while((line = bufferedReader.readLine()) != null) {
             if (line.equalsIgnoreCase(searchPhrase)) {
-                System.out.println("Password Found: " + line);
+                System.out.println("Password Found Using 10kPasswords: " + line);
                 System.exit(0);
                 return;
             }
